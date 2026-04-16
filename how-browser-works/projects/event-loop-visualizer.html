@@ -1,0 +1,96 @@
+<!-- // demonstrates the event loop using setTimeout, Promises, and async/await with
+colored boxes showing call stack, microtask queue, and macrotask queue states. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Loop Visualizer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+      }
+    </style>
+  </head>
+  <body style="height: 100dvh">
+    <main
+      style="
+        display: flex;
+        width: 100%;
+        height: 100%;
+        border: 2px dashed black;
+        border-radius: 10px;
+        padding: 10px;
+        gap: 20px;
+      "
+    >
+      <aside
+        style="width: 50%; display: flex; flex-direction: column; gap: 10px"
+      >
+        <button id="run-btn">Run</button>
+        <textarea
+          style="width: 100%; height: 70%; resize: none"
+          id="code-box"
+          placeholder="Write Code here"
+        ></textarea>
+        <div
+          style="
+            height: 30%;
+            border: 2px solid orange;
+            padding: 10px;
+            border-radius: 5px;
+          "
+        >
+          <p>Html Redered Code</p>
+          <button id="click-me-btn">Click me</button>
+        </div>
+      </aside>
+      <aside
+        style="
+          width: 50%;
+          display: flex;
+          height: 100%;
+          flex-direction: column;
+          gap: 20px;
+        "
+      >
+        <div
+          id="call-stack"
+          style="
+            height: 30%;
+            border: 2px solid green;
+            padding: 10px;
+            border-radius: 5px;
+          "
+        >
+          <p>Call Stack</p>
+        </div>
+        <div
+          style="
+            height: 30%;
+            border: 2px solid purple;
+            padding: 10px;
+            border-radius: 5px;
+          "
+          id="web-apis"
+        >
+          <p>Web apis</p>
+        </div>
+        <div
+          style="
+            height: 30%;
+            border: 2px solid blue;
+            padding: 10px;
+            border-radius: 5px;
+          "
+          id="task-queue"
+        >
+          <p>Task Queue</p>
+        </div>
+      </aside>
+    </main>
+
+    <script src="./visualize.js"></script>
+  </body>
+</html>
