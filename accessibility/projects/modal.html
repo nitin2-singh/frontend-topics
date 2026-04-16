@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Only Modal</title>
+  </head>
+
+  <body>
+    <!-- Open button (uses form to open dialog) -->
+    <form method="dialog">
+      <button onclick="document.getElementById('modal').showModal()">
+        Open Modal
+      </button>
+    </form>
+
+    <!-- Modal -->
+    <dialog
+      id="modal"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-desc"
+    >
+      <article>
+        <header>
+          <h2 id="modal-title">Subscribe</h2>
+        </header>
+
+        <p id="modal-desc">Enter your email to subscribe to updates.</p>
+
+        <form method="dialog">
+          <label for="email">Email</label><br />
+          <input id="email" type="email" required /><br /><br />
+
+          <menu>
+            <button value="cancel">Cancel</button>
+            <button value="submit">Submit</button>
+          </menu>
+        </form>
+
+        <footer>
+          <p>Press Esc or Cancel to close</p>
+        </footer>
+      </article>
+    </dialog>
+  </body>
+</html>
