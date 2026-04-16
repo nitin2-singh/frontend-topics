@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Step Registration Form</title>
+  </head>
+
+  <body>
+    <main>
+      <h1>Register</h1>
+
+      <!-- Progress Indicator -->
+      <nav aria-label="Registration steps">
+        <ol>
+          <li id="step-indicator-1">Step 1: Personal Info</li>
+          <li id="step-indicator-2">Step 2: Account Details</li>
+          <li id="step-indicator-3">Step 3: Confirm</li>
+        </ol>
+      </nav>
+
+      <form id="form">
+        <!-- STEP 1 -->
+        <fieldset id="step-1">
+          <legend>Personal Information</legend>
+
+          <label for="name">Full Name</label><br />
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            aria-describedby="name-error"
+          />
+          <span id="name-error" hidden>Please enter your full name</span>
+          <br /><br />
+
+          <label for="email">Email</label><br />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            aria-describedby="email-error"
+          />
+          <span id="email-error" hidden>Enter a valid email address</span>
+          <br /><br />
+
+          <button type="button" onclick="nextStep()">Next</button>
+        </fieldset>
+
+        <!-- STEP 2 -->
+        <fieldset id="step-2" hidden>
+          <legend>Account Details</legend>
+
+          <label for="password">Password</label><br />
+          <input
+            id="password"
+            name="password"
+            type="password"
+            minlength="6"
+            required
+            aria-describedby="password-error"
+          />
+          <span id="password-error" hidden>
+            Password must be at least 6 characters
+          </span>
+          <br /><br />
+
+          <label for="confirm">Confirm Password</label><br />
+          <input
+            id="confirm"
+            name="confirm"
+            type="password"
+            required
+            aria-describedby="confirm-error"
+          />
+          <span id="confirm-error" hidden>Passwords must match</span>
+          <br /><br />
+
+          <button type="button" onclick="prevStep()">Back</button>
+          <button type="button" onclick="nextStep()">Next</button>
+        </fieldset>
+
+        <!-- STEP 3 -->
+        <fieldset id="step-3" hidden>
+          <legend>Confirmation</legend>
+
+          <p>Please review your details and submit.</p>
+
+          <button type="button" onclick="prevStep()">Back</button>
+          <button type="submit">Submit</button>
+        </fieldset>
+      </form>
+    </main>
+
+    <script>
+      let currentStep = 1;
+
+      function showStep(step) {
+        document.querySelectorAll("fieldset").forEach((fs) => {
+          fs.hidden = true;
+        });
+
+        document.getElementById(`step-${step}`).hidden = false;
+
+        // update progress indicator
+        document.querySelectorAll("nav li").forEach((li, i) => {
+          if (i + 1 === step) {
+            li.setAttribute("aria-current", "step");
+          } else {
+            li.removeAttribute("aria-current");
+          }
+        });
+      }
+
+      function nextStep() {
+        const currentFieldset = document.getElementById(`step-${currentStep}`);
+
+        // native validation
+        if (!currentFieldset.checkValidity()) {
+          currentFieldset.reportValidity();
+          return;
+        }
+
+        // custom password match validation
+        if (currentStep === 2) {
+          const pass = document.getElementById("password");
+          const confirm = document.getElementById("confirm");
+          const error = document.getElementById("confirm-error");
+
+          if (pass.value !== confirm.value) {
+            confirm.setCustomValidity("Passwords do not match");
+            error.hidden = false;
+            confirm.reportValidity();
+            return;
+          } else {
+            confirm.setCustomValidity("");
+            error.hidden = true;
+          }
+        }
+
+        currentStep++;
+        showStep(currentStep);
+      }
+
+      function prevStep() {
+        currentStep--;
+        showStep(currentStep);
+      }
+
+      // show/hide errors dynamically
+      document.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("invalid", () => {
+          const errorId = input.getAttribute("aria-describedby");
+          const error = document.getElementById(errorId);
+          if (error) error.hidden = false;
+        });
+
+        input.addEventListener("input", () => {
+          const errorId = input.getAttribute("aria-describedby");
+          const error = document.getElementById(errorId);
+          if (error) error.hidden = true;
+          input.setCustomValidity("");
+        });
+      });
+
+      showStep(currentStep);
+    </script>
+  </body>
+</html>
