@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Understanding the JavaScript Event Loop</title>
+  </head>
+
+  <body>
+    <!-- Page Header -->
+    <header>
+      <h1>Dev Blog</h1>
+      <nav aria-label="Blog navigation">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Articles</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Blog Article -->
+      <article>
+        <header>
+          <h2>Understanding the JavaScript Event Loop</h2>
+          <p>
+            By <strong>Nitin Negi</strong> |
+            <time datetime="2026-04-16">April 16, 2026</time>
+          </p>
+        </header>
+
+        <p>
+          JavaScript is single-threaded, yet it can handle asynchronous tasks
+          efficiently. This is made possible by the event loop, a core concept
+          every frontend developer must understand.
+        </p>
+
+        <!-- Image with caption -->
+        <figure>
+          <img
+            src="event-loop-diagram.png"
+            alt="Diagram showing JavaScript call stack, web APIs, and task queue interaction"
+          />
+          <figcaption>
+            Visual representation of the JavaScript event loop
+          </figcaption>
+        </figure>
+
+        <section>
+          <h3>What is the Event Loop?</h3>
+          <p>
+            The event loop continuously checks the call stack and the task
+            queue. If the call stack is empty, it pushes tasks from the queue
+            into the stack for execution.
+          </p>
+
+          <blockquote>
+            “The event loop is what allows JavaScript to perform non-blocking
+            operations despite being single-threaded.”
+          </blockquote>
+        </section>
+
+        <section>
+          <h3>Key Components</h3>
+          <ul>
+            <li>Call Stack</li>
+            <li>Web APIs</li>
+            <li>Task Queue (Macrotask Queue)</li>
+            <li>Microtask Queue</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Example</h3>
+          <p>Consider the following code:</p>
+          <pre>
+<code>
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 1000);
+
+console.log("End");
+</code>
+          </pre>
+
+          <p>
+            Output:
+            <br />
+            Start → End → Timeout
+          </p>
+        </section>
+
+        <footer>
+          <p>
+            Tags:
+            <a href="#">JavaScript</a>, <a href="#">Event Loop</a>,
+            <a href="#">Async Programming</a>
+          </p>
+        </footer>
+      </article>
+
+      <!-- Aside: Related Posts -->
+      <aside>
+        <h3>Related Posts</h3>
+        <ul>
+          <li><a href="#">Promises vs Async/Await</a></li>
+          <li><a href="#">Understanding Closures</a></li>
+          <li><a href="#">How the Call Stack Works</a></li>
+        </ul>
+      </aside>
+
+      <!-- Comments Section -->
+      <section>
+        <h2>Comments</h2>
+
+        <article>
+          <header>
+            <p><strong>John Doe</strong></p>
+            <time datetime="2026-04-15">April 15, 2026</time>
+          </header>
+          <p>This article made the event loop much clearer. Thanks!</p>
+        </article>
+
+        <article>
+          <header>
+            <p><strong>Jane Smith</strong></p>
+            <time datetime="2026-04-14">April 14, 2026</time>
+          </header>
+          <p>Great explanation with examples.</p>
+        </article>
+
+        <!-- Comment Form -->
+        <form>
+          <fieldset>
+            <legend>Leave a Comment</legend>
+
+            <label for="name">Name</label><br />
+            <input type="text" id="name" name="name" required /><br />
+
+            <label for="email">Email</label><br />
+            <input type="email" id="email" name="email" required /><br />
+
+            <label for="comment">Comment</label><br />
+            <textarea id="comment" name="comment" rows="4" required></textarea
+            ><br />
+
+            <button type="submit">Post Comment</button>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+
+    <!-- Page Footer -->
+    <footer>
+      <p>&copy; 2026 Dev Blog. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
